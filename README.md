@@ -23,3 +23,7 @@ A tool that I wrote to help reversing on Windows.
 ## Presentation
 
 See the PowerPoint presentation in `slides/` for some examples on the sample application.
+
+## Caveats
+
+This is pulled from a working copy, so some things may not work properly.  If you run into any issues, feel free to contact me at [@ebeip90](https://twitter.com/ebeip90) or ebeip90 on Freenode.net.
