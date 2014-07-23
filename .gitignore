@@ -7,6 +7,8 @@
 *.exe.py
 *.exe.traces.py
 *.exe.modules.py
+*.pyc
+*~
 pin.log
 Debug
 Release
