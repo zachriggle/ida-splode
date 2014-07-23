@@ -19,6 +19,9 @@ A tool that I wrote to help reversing on Windows.  Also proof that I am bad at c
 - Start IDA Pro, open `demo.exe`
 - Run `py\idapython_script.py` from within IDA
 - If everything worked, `ida-splode` should automatically recognize all traces for the open binary from the database, and present a list of options.
+- Press any of the hotkeys presented to do `${things}`.  
+    - The slides should give you a good idea what is avaiable.
+    - `Ctrl+Shift+H` reprints the help message
 
 ## Presentation
 
