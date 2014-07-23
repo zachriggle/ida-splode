@@ -1,0 +1,86 @@
+######################################################################################
+# This is the NMAKE file for building and testing PIN tools.
+######################################################################################
+
+######################################################################################
+#             Optional arguments (variables) accepted by this file
+# TARGET      "ia32" or "ia32e". By default, the PROCESSOR_ARCHITECTURE environment
+#             variable is used to determine CPU.
+# DEBUG       Debug (1) or release (0) build. The default is 0.
+# PIN_HOME    Location of the source/tool directory in the PIN kit or PinTool directory
+#             in the development tree. By default this is the current directory.
+# SET_VCENV   1 - find MSVC installation directories and set environment accordingly.
+#             0 - use current environment as is. Should be only used when running
+#                 in the MSVS 2005/2008/2010 command prompt.
+#             The default is 1.
+# MSVCVER     8  - use Visual Studio 2005
+#             9  - use visual studio 2008
+#             10 - use visual studio 2010
+######################################################################################
+
+# SET_VCENV=0
+# PIN_HOME="C:\workspace\pin\pin-2.13-61206-msvc10-windows"
+
+#------------------------------ COMPILER OPTIONS ------------------------------
+PIN_COMMON_CXXFLAGS=/nologo /Gy /GS- /WL /MP /LD /MT /EHs- /EHa- \
+                    /wd4530 /DTARGET_WINDOWS /DBIGARRAY_MULTIPLIER=1 \
+                    /DUSING_XED /D_CRT_SECURE_NO_DEPRECATE /D_SECURE_SCL=0
+
+# ----- ARCH-SPECIFIC -----
+PIN_IA32_CXXFLAGS= /DTARGET_IA32 /DHOST_IA32
+PIN_IA32E_CXXFLAGS= /DTARGET_IA32E /DHOST_IA32E
+
+
+#------------------------------- LINKER OPTIONS -------------------------------
+PIN_COMMON_LDFLAGS= /DLL /EXPORT:main /NODEFAULTLIB /NOLOGO /INCREMENTAL:NO
+
+# ----- ARCH-SPECIFIC -----
+PIN_IA32_LDFLAGS= /MACHINE:x86 \
+                  /ENTRY:Ptrace_DllMainCRTStartup@12 \
+                  /BASE:0x55000000
+PIN_IA32E_LDFLAGS= /MACHINE:x64 \
+                   /ENTRY:Ptrace_DllMainCRTStartup \
+                   /BASE:0xC5000000
+
+
+#------------------------------ INPUT FILE PATHS ------------------------------
+PIN_INCLUDES= /I$(PIN_HOME)\source\include\pin \
+              /I$(PIN_HOME)\source\include\pin\gen \
+              /I$(PIN_HOME)\extras\components\include \
+              /I$(PIN_HOME)\extras\xed2-ia32\include
+
+PIN_LPATHS= /LIBPATH:$(PIN_HOME)\ia32\lib \
+            /LIBPATH:$(PIN_HOME)\ia32\lib-ext \
+            /LIBPATH:$(PIN_HOME)\extras\xed2-ia32\lib
+
+#------------------------------ DEBUG VS RELEASE ------------------------------
+PIN_DEBUG_CXXFLAGS= /Od /Zi
+PIN_DEBUG_LDFLAGS= /DEBUG
+
+PIN_RELEASE_CXXFLAGS= /O2 /Zi /GL /Oy
+PIN_RELEASE_LDFLAGS= /OPT:REF,ICF
+
+
+CXXFLAGS=$(INCLUDES) $(PIN_COMMON_CXXFLAGS) $(PIN_IA32_CXXFLAGS) $(PIN_EXTRA_CXXFLAGS)
+
+PIN_COMMON_LIBS= pin.lib libxed.lib libcpmt.lib libcmt.lib pinvm.lib kernel32.lib Advapi32.lib
+PIN_IA32_LIBS= dbghelp32.lib ntdll-32.lib
+PIN_IA32E_LIBS= dbghelp64.lib ntdll-64.lib
+
+
+DEBUG=0
+PIN_CXXFLAGS= $(PIN_RELEASE_CXXFLAGS) $(CXXFLAGS)
+PIN_LDFLAGS=  $(PIN_RELEASE_LDFLAGS)
+
+SOURCE=src/*.cpp
+HEADERS=src/*.h
+
+ida-splode.dll: $(SOURCE) $(HEADERS)
+    rem Build a non-PGO-instrumented binary
+    echo cl $(SOURCE) $(PIN_CXXFLAGS) /link $(PIN_LPATHS) $(PIN_COMMON_LDFLAGS) $(PIN_IA32_LDFLAGS) $(PIN_EXTRA_LDFLAGS) $(PIN_LDFLAGS) $(PIN_IA32_LIBS) $(PIN_COMMON_LIBS)
+
+    rem Demo run
+    run
+
+    rem Make sure that it works in python
+    python -c "import fun"

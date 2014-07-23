@@ -1,0 +1,12 @@
+*.obj
+*.tlog
+*.exp
+*.lastbuildstat
+*.lib
+*.pdb
+*.exe.py
+*.exe.traces.py
+*.exe.modules.py
+pin.log
+Debug
+Release

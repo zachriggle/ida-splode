@@ -1,0 +1,21 @@
+def go():
+    ptr_size=4
+    tableStart = LocByName('_function')
+    fns=['itrp_SVTCA_0', 'itrp_SVTCA_1', 'itrp_SPVTCA_0', 'itrp_SPVTCA_1', 'itrp_SFVTCA_0', 'itrp_SFVTCA_1', 'itrp_SPVTL', 'itrp_SPVTL', 'itrp_SFVTL', 'itrp_SFVTL', 'itrp_WPV', 'itrp_WFV', 'itrp_RPV', 'itrp_RFV', 'itrp_SFVTPV', 'itrp_ISECT', 'itrp_SRP0', 'itrp_SRP1', 'itrp_SRP2', 'itrp_SetElementPtr', 'itrp_SetElementPtr', 'itrp_SetElementPtr', 'itrp_SetElementPtr', 'itrp_LLOOP', 'itrp_RTG', 'itrp_RTHG', 'itrp_LMD', 'itrp_ELSE', 'itrp_JMPR', 'itrp_LWTCI', 'itrp_LSWCI', 'itrp_LSW', 'itrp_DUP', 'itrp_POP', 'itrp_CLEAR', 'itrp_SWAP', 'itrp_DEPTH', 'itrp_CINDEX', 'itrp_MINDEX', 'itrp_ALIGNPTS', 'itrp_RAW', 'itrp_UTP', 'itrp_LOOPCALL', 'itrp_CALL', 'itrp_FDEF', 'itrp_IllegalInstruction', 'itrp_MDAP', 'itrp_MDAP', 'itrp_IUP', 'itrp_IUP', 'itrp_SHP', 'itrp_SHP', 'itrp_SHC', 'itrp_SHC', 'itrp_SHE', 'itrp_SHE', 'itrp_SHPIX', 'itrp_IP', 'itrp_MSIRP', 'itrp_MSIRP', 'itrp_ALIGNRP', 'itrp_RTDG', 'itrp_MIAP', 'itrp_MIAP', 'itrp_NPUSHB', 'itrp_NPUSHW', 'itrp_WS', 'itrp_RS', 'itrp_WCVT', 'itrp_RCVT', 'itrp_RC', 'itrp_RC', 'itrp_WC', 'itrp_MD', 'itrp_MD', 'itrp_MPPEM', 'itrp_MPS', 'itrp_FLIPON', 'itrp_FLIPOFF', 'itrp_AA', 'itrp_LT', 'itrp_LTEQ', 'itrp_GT', 'itrp_GTEQ', 'itrp_EQ', 'itrp_NEQ', 'itrp_ODD', 'itrp_EVEN', 'itrp_IF', '??0EPOINTFIX@@QEAA@XZ', 'itrp_AND', 'itrp_OR', 'itrp_NOT', 'itrp_DELTAP1', 'itrp_SDB', 'itrp_SDS', 'itrp_ADD', 'itrp_SUB', 'itrp_DIV', 'itrp_MUL', 'itrp_ABS', 'itrp_NEG', 'itrp_FLOOR', 'itrp_CEILING', 'itrp_ROUND', 'itrp_ROUND', 'itrp_ROUND', 'itrp_ROUND', 'itrp_NROUND', 'itrp_NROUND', 'itrp_NROUND', 'itrp_NROUND', 'itrp_WCVTFOD', 'itrp_DELTAP2', 'itrp_DELTAP3', 'itrp_DELTAC1', 'itrp_DELTAC2', 'itrp_DELTAC3', 'itrp_SROUND', 'itrp_S45ROUND', 'itrp_JROT', 'itrp_JROF', 'itrp_ROFF', 'itrp_IllegalInstruction', 'itrp_RUTG', 'itrp_RDTG', 'itrp_SANGW', 'itrp_AA', 'itrp_FLIPPT', 'itrp_FLIPRGON', 'itrp_FLIPRGOFF', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_SCANCTRL', 'itrp_SDPVTL', 'itrp_SDPVTL', 'itrp_GETINFO', 'itrp_IDEF', 'itrp_ROTATE', 'itrp_MAX', 'itrp_MIN', 'itrp_SCANTYPE', 'itrp_INSTCTRL', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_IDefPatch', 'itrp_PUSHB1', 'itrp_PUSHB', 'itrp_PUSHB', 'itrp_PUSHB', 'itrp_PUSHB', 'itrp_PUSHB', 'itrp_PUSHB', 'itrp_PUSHB', 'itrp_PUSHW1', 'itrp_PUSHW', 'itrp_PUSHW', 'itrp_PUSHW', 'itrp_PUSHW', 'itrp_PUSHW', 'itrp_PUSHW', 'itrp_PUSHW', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MDRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP', 'itrp_MIRP']
+    if tableStart != BADADDR:
+        for i in xrange(len(fns)):
+            Ptr = tableStart + i*ptr_size
+            Fn  = Dword(Ptr) if ptr_size == 4 else Qword(Ptr)
+            print "%x => %x" % (Ptr, Fn)
+            MakeData(Ptr, FF_DWRD, 4, 0)
+            MakeName(Fn, "")
+            MakeName(Fn, "%s" % fns[i])
+            SetType(Fn, "char* function(char* pbyInst, int lOpCode);")
+    else:
+        print "Could not find '_function' table"
+
+try: 
+    go()
+except:
+    import traceback
+    traceback.print_exc()
