@@ -67,11 +67,11 @@ def StructMembers(sid):
     print "First size %r" % size
 
     while off < size:
-        print repr(name)
-        name = GetMemberName(sid, off)
-        if name is not None:
-            print repr((off, name, idc.GetMemberSize(sid, off)))
-            yield (off, name, idc.GetMemberSize(sid, off))
+        mname = GetMemberName(sid, off)
+        print repr(mname)
+        if mname is not None:
+            print repr((off, mname, idc.GetMemberSize(sid, off)))
+            yield (off, mname, idc.GetMemberSize(sid, off))
         print repr(off)
         off = idc.GetStrucNextOff(sid, off)
 
