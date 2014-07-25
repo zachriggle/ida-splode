@@ -11,9 +11,9 @@ A tool that I wrote to help reversing on Windows.  Also proof that I am bad at c
 
 ## Usage
 
-- Run build.bat from a MSVC 2010 console
-- Optionally, enable page heap for test.exe
-- Run release.bat to trace the test.exe program in release mode
+- Run `build.bat` from a MSVC 2010 console
+- Optionally, enable page heap for `test.exe` (`gflags /i test.exe +hpa`)
+- Run `release.bat` to trace the test.exe program in release mode
 - Start MongoDB
 - Run `demo.exe.py` to import the traces
 - Start IDA Pro, open `demo.exe`
