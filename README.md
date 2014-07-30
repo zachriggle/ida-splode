@@ -25,12 +25,12 @@ A tool that I wrote to help reversing on Windows.  Also proof that I am bad at c
 
 ## Tips
 
-- If PageHeap isn't enabled (`+hpa`), it will waste a lot of time looking for heap metadata at instrumentation-time.
+- If PageHeap isn't enabled (`+hpa`), it will waste a lot of time [looking for heap metadata at instrumentation-time](https://github.com/zachriggle/ida-splode/blob/master/src/symbolic-heap.cpp#L207).
 - For whatever reason, if `_NT_SYMBOL_PATH` includes any `SYM*` paths versus just local paths, it won't resolve symbols.  Use `_NT_SYMBOL_PATH=C:\symbols` or similar.
-- There are lots of twiddly bits to turn on and off.  See `knobs.cpp`.
+- There are lots of twiddly bits to turn on and off.  See [`knobs.cpp`](https://github.com/zachriggle/ida-splode/blob/master/src/knobs.cpp).
 - This is generally intended to be run off-line.  Pin alone will make execution slow; my instrumentation has not been profiled or optimized for speed.
-    - If you're not using a module white-list, expect everything to be painfully slow.  For example `-mw iexplore.exe`.  Otherwise, you'll be instrumenting the innards of `msvcrt`, `kernel32`, etc.
-    - To speed things up, consider using the `-r` option to limit instrumentation to inside the scope of a particular routine (so you can skip all the start-up stuff).  For example, `-r iexplore!InterestingFunction`.
+    - If you're not using a module white-list, [only the main executable will be instrumented](https://github.com/zachriggle/ida-splode/blob/master/src/ida-splode.cpp#L98).  Syntax for the whitelist is `-m foo.exe -m bar.dll` and is [case-insensitive](https://github.com/zachriggle/ida-splode/blob/master/src/named-image-instrumenter.cpp#L20).
+    - To speed things up, consider using the `-r` option to limit instrumentation to inside the scope of a particular routine (so you can skip all the start-up stuff).  For example, `-r demo!TestCustomMalloc`.
 
 ## Presentation
 
