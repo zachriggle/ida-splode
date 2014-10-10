@@ -22,8 +22,6 @@ namespace WIN
 
 using namespace std;
 
-#define IMG_Contains(img, x) ((IMG_LowAddress(img) <= x) && (x < IMG_HighAddress(img)))
-
 #include "win.h"
 #include "pinlock.h"
 #include "logfile.h"
